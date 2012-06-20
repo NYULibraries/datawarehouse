@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.nyu.library</groupId>
+	<artifactId>datawarehouse</artifactId>
+	<version>1.0.0-alpha.1</version>
+	<packaging>jar</packaging>
+	<name>datawarehouse</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>[4.8.2,)</version>
+      <scope>test</scope>
+    </dependency>
+		<dependency>
+			<artifactId>common</artifactId>
+			<groupId>edu.nyu.library</groupId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- Needs to be added to the local repository -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+		</dependency>
+	</dependencies>
+</project>
