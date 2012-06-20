@@ -37,4 +37,4 @@ The deploy mechanism assumes rvm on the deploy host. In order to deploy:
 Since the DataWarehouse libraries can be leveraged across systems, deploy tasks are created for specific deploys.
 Currently the following deploy tasks are available
 
-  - deploy:enrichment
+  - enrichment
