@@ -38,4 +38,5 @@ Since the DataWarehouse libraries can be leveraged across systems, deploy tasks 
 Currently the following deploy tasks are available
 
   - deploy:enrichment
-  
+
+[Javadocs](http://nyulibraries.github.com/datawarehouse/apidocs/)
