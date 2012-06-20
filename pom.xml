@@ -12,14 +12,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>[4.8.2,)</version>
-      <scope>test</scope>
-    </dependency>
 		<dependency>
-			<artifactId>common</artifactId>
+			<artifactId>maven-common</artifactId>
 			<groupId>edu.nyu.library</groupId>
 			<version>1.0.0</version>
 		</dependency>
@@ -100,8 +94,8 @@
           <links>
             <!-- link the versioned jar to a universal file name -->
             <link>
-              <dst>${project.build.directory}\/${project.artifactId}.${project.packaging}</dst>
-              <src>${project.build.directory}\/${project.artifactId}-${project.version}.${project.packaging}</src>
+              <dst>${project.build.directory}\/${project.artifactId}.jar</dst>
+              <src>${project.build.directory}\/${project.artifactId}-${project.version}.jar</src>
             </link>
           </links>
         </configuration>
