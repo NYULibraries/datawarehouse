@@ -1,7 +1,7 @@
 Datawarehouse
 =============
 
-The NYU Libraries DataWarehouse is a utility library for retrieving data from a data warehouse.
+The NYU Libraries DataWarehouse ([Javadocs](http://nyulibraries.github.com/datawarehouse/apidocs/)) is a utility library for retrieving data from a data warehouse.
 NYU connects to a variety of databases in the warehouse for Primo enrichment plugins,
 but the library can be used for any processes requiring connection to RDBMS.
 
@@ -38,5 +38,3 @@ Since the DataWarehouse libraries can be leveraged across systems, deploy tasks 
 Currently the following deploy tasks are available
 
   - deploy:enrichment
-
-[Javadocs](http://nyulibraries.github.com/datawarehouse/apidocs/)
