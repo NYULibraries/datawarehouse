@@ -47,7 +47,7 @@ namespace :deploy do
     No default code updates.
   DESC
   task :update_code do
-    "Skipping default code update."
+    puts "Skipping default code update."
   end
   
   desc <<-DESC
