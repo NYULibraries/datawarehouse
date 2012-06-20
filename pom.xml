@@ -75,6 +75,7 @@
       <plugin>
         <groupId>com.pyx4j</groupId>
         <artifactId>maven-junction-plugin</artifactId>
+        <version>1.0.3</version>
         <executions>
           <execution>
             <phase>package</phase>
