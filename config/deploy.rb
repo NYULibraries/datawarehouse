@@ -1,14 +1,12 @@
-# Call with cap -S branch="<branch-name>" [staging|production] deploy
+# Call with cap -S branch="<branch-name>" -S user="<user>" [staging|production] deploy
 require 'capistrano/ext/multistage'
 set :application, "datawarehouse"
-set :user, "primo"
-
+set(:user, 'primo') unless exists?(:user)
 set :scm, :git
 set :repository,  "git@github.com:NYULibraries/datawarehouse.git"
 set :use_sudo, false
 set :stages, ["staging", "production"]
 set :default_stage, "staging"
-
 set :build_dir, "target"
 
 namespace :deploy do
@@ -26,18 +24,15 @@ namespace :deploy do
     run_locally "mvn javadoc:javadoc && git checkout gh-pages && rm -r apidocs && mv #{build_dir}/site/apidocs apidocs && git add apidocs && git commit -am 'Add javadocs.' && git push && git checkout #{branch}"
   end
   
-   
-  before "deploy", "deploy:package", "deploy:javadocs"
-  
   desc <<-DESC
-    No restart necessary for Primo.
+    No restart necessary.
   DESC
   task :restart do
     puts "Skipping restart."
   end
 
   desc <<-DESC
-    No symlink creation necessary for Primo.
+    No symlink creation necessary.
   DESC
   task :create_symlink do
     puts "Skipping symlink creation."
@@ -58,10 +53,13 @@ namespace :deploy do
     top.upload File.join(build_dir, "#{application}.jar"), "#{deploy_to}", :via => :scp
   end
   
+  before "deploy:enrichment", "deploy:package", "deploy:javadocs"
+  
   desc <<-DESC
-    
+    No finalization steps necessary.
   DESC
   task :finalize_update, :except => { :no_release => true } do
+    puts "Skipping finalize update."
   end
   
 end

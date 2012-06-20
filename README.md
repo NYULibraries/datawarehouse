@@ -32,7 +32,7 @@ The deploy mechanism assumes rvm on the deploy host. In order to deploy:
     y[es], n[o], v[iew], c[ancel]> yes
     $ bundle install
     ...
-    $ cap [-S branch=<branch-name>] [staging|production] deploy:<task>
+    $ cap [-S branch=<branch-name>] [-S user=<user-name>] [staging|production] deploy:<task>
 
 Since the DataWarehouse libraries can be leveraged across systems, deploy tasks are created for specific deploys.
 Currently the following deploy tasks are available
