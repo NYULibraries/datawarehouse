@@ -2,6 +2,10 @@
  */
 package edu.nyu.library.datawarehouse;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -27,6 +31,17 @@ public class DataWarehouseModule extends AbstractModule {
 	 * @param properties
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
+	 */
+	public DataWarehouseModule(File propertiesFile) 
+			throws FileNotFoundException, IOException {
+		super();
+		properties = new Properties();
+		properties.load(new FileReader(propertiesFile));
+	}
+
+	/**
+	 * 
+	 * @param properties
 	 */
 	public DataWarehouseModule(Properties properties) {
 		super();
