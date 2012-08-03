@@ -9,19 +9,19 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import edu.nyu.library.datawarehouse.DataWarehouse;
-import edu.nyu.library.datawarehouse.DataWarehouseModule;
 
 /**
  * @author Scot Dalton
@@ -40,8 +40,15 @@ public class DataWarehouseTest {
 	@Before
 	public void setup() throws FileNotFoundException, IOException {
 		File propertiesFile = new File(propertiesFilename);
+		Properties properties = new Properties();
+		if (propertiesFile.exists()) {
+			properties.load(new FileReader(propertiesFile));
+		} else {
+			for(Entry<String,String> property : System.getenv().entrySet())
+				properties.setProperty(property.getKey(), property.getValue());
+		}
 		injector = 
-			Guice.createInjector(new DataWarehouseModule(propertiesFile));
+			Guice.createInjector(new DataWarehouseModule(properties));
 	}
 	
 	@Test
