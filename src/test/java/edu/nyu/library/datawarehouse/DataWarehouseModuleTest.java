@@ -3,24 +3,19 @@
  */
 package edu.nyu.library.datawarehouse;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.Map.Entry;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import edu.nyu.library.datawarehouse.DataWarehouse;
-import edu.nyu.library.datawarehouse.DataWarehouseModule;
 
 /**
  * @author Scot Dalton
@@ -33,17 +28,15 @@ public class DataWarehouseModuleTest {
 	private Injector injector;
 	
 	@Before
-	public void setup() throws FileNotFoundException, IOException {
-		File propertiesFile = new File(propertiesFilename);
-		Properties properties = new Properties();
-		if (propertiesFile.exists()) {
-			properties.load(new FileReader(propertiesFile));
-		} else {
+	public void setup() throws ConfigurationException {
+		PropertiesConfiguration propertiesConfiguration = 
+			new PropertiesConfiguration(propertiesFilename);
+		if (propertiesConfiguration.isEmpty()) {
 			for(Entry<String,String> property : System.getenv().entrySet())
-				properties.setProperty(property.getKey(), property.getValue());
+				propertiesConfiguration.setProperty(property.getKey(), property.getValue());
 		}
 		injector = 
-			Guice.createInjector(new DataWarehouseModule(properties));
+			Guice.createInjector(new DataWarehouseModule(propertiesConfiguration));
 	}
 	
 	@Test

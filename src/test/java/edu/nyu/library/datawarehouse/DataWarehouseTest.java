@@ -7,16 +7,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map.Entry;
-import java.util.Properties;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,17 +37,15 @@ public class DataWarehouseTest {
 	private Injector injector;
 	
 	@Before
-	public void setup() throws FileNotFoundException, IOException {
-		File propertiesFile = new File(propertiesFilename);
-		Properties properties = new Properties();
-		if (propertiesFile.exists()) {
-			properties.load(new FileReader(propertiesFile));
-		} else {
+	public void setup() throws ConfigurationException {
+		PropertiesConfiguration propertiesConfiguration = 
+			new PropertiesConfiguration(propertiesFilename);
+		if (propertiesConfiguration.isEmpty()) {
 			for(Entry<String,String> property : System.getenv().entrySet())
-				properties.setProperty(property.getKey(), property.getValue());
+				propertiesConfiguration.setProperty(property.getKey(), property.getValue());
 		}
 		injector = 
-			Guice.createInjector(new DataWarehouseModule(properties));
+			Guice.createInjector(new DataWarehouseModule(propertiesConfiguration));
 	}
 	
 	@Test
