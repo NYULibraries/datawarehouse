@@ -18,11 +18,21 @@
       <version>[4.8.2,)</version>
       <scope>test</scope>
     </dependency>
-		<dependency>
-			<artifactId>maven-common</artifactId>
-			<groupId>edu.nyu.library</groupId>
-			<version>1.0.0</version>
-		</dependency>
+    <dependency>
+      <artifactId>commons-dbutils</artifactId>
+      <groupId>commons-dbutils</groupId>
+      <version>1.5</version>
+    </dependency>
+    <dependency>
+      <artifactId>commons-dbcp</artifactId>
+      <groupId>commons-dbcp</groupId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <artifactId>maven-common</artifactId>
+      <groupId>edu.nyu.library</groupId>
+      <version>1.0.0</version>
+    </dependency>
 		<!-- Needs to be added to the local repository -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>

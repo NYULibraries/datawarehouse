@@ -6,11 +6,11 @@ package edu.nyu.library.datawarehouse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.SQLException;
-import java.util.Map.Entry;
 
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,15 +28,11 @@ public class DataWarehouseModuleTest {
 	private Injector injector;
 	
 	@Before
-	public void setup() throws ConfigurationException {
-		PropertiesConfiguration propertiesConfiguration = 
-			new PropertiesConfiguration(propertiesFilename);
-		if (propertiesConfiguration.isEmpty()) {
-			for(Entry<String,String> property : System.getenv().entrySet())
-				propertiesConfiguration.setProperty(property.getKey(), property.getValue());
-		}
+	public void setup() throws ConfigurationException, FileNotFoundException {
+		DataWarehouseProperties properties = 
+			new DataWarehouseProperties.Builder(new FileReader(propertiesFilename)).build();
 		injector = 
-			Guice.createInjector(new DataWarehouseModule(propertiesConfiguration));
+			Guice.createInjector(new DataWarehouseModule(properties));
 	}
 	
 	@Test

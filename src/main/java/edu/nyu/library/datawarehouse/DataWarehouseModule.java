@@ -2,12 +2,6 @@
  */
 package edu.nyu.library.datawarehouse;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-
-import org.apache.commons.configuration.PropertiesConfiguration;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -20,15 +14,15 @@ import com.google.inject.Singleton;
  *
  */
 public class DataWarehouseModule extends AbstractModule {
-	private PropertiesConfiguration propertiesConfiguration;
+	private DataWarehouseProperties properties;
 
 	/**
 	 * 
 	 * @param properties
 	 */
-	public DataWarehouseModule(PropertiesConfiguration propertiesConfiguration) {
+	public DataWarehouseModule(DataWarehouseProperties properties) {
 		super();
-		this.propertiesConfiguration = propertiesConfiguration;
+		this.properties = properties;
 	}
 	
 	@Override
@@ -45,16 +39,7 @@ public class DataWarehouseModule extends AbstractModule {
 	DataWarehouse provideDataWarehouse() {
 		DataWarehouse dataWarehouse = null;
 		try {
-			Driver driver = 
-				(Driver) Class.forName(
-					propertiesConfiguration.getString("driverClass")).newInstance();
-			String connectionURL = propertiesConfiguration.getString("connectionURL");
-			String username = propertiesConfiguration.getString("username");
-			String password = propertiesConfiguration.getString("password");
-			DriverManager.registerDriver(driver);
-			Connection connection = 
-				DriverManager.getConnection(connectionURL, username, password);
-			dataWarehouse = new DataWarehouse(connection);
+			dataWarehouse = new DataWarehouse(properties.getConnection());
 		} catch (Exception e) {
 			addError(e);
 		}
