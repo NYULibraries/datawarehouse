@@ -21,7 +21,7 @@ namespace :deploy do
     Push javadocs to GitHub pages.
   DESC
   task :javadocs do
-    run_locally "mvn javadoc:javadoc && git checkout gh-pages && rm -r apidocs && mv #{build_dir}/site/apidocs apidocs && git add apidocs && git commit -am 'Add javadocs.' && git push && git checkout #{branch}"
+    run_locally "mvn javadoc:javadoc && git fetch --all && git checkout gh-pages && git pull --rebase origin gh-pages && rm -r apidocs && mv #{build_dir}/site/apidocs apidocs && git add apidocs && git commit -am 'Add javadocs.' && git push origin gh-pages && git checkout #{branch}"
   end
   
   desc <<-DESC
@@ -53,7 +53,7 @@ namespace :deploy do
     top.upload File.join(build_dir, "#{application}.jar"), "#{deploy_to}", :via => :scp
   end
   
-  before "deploy:enrichment", "deploy:package", "deploy:javadocs"
+  before "deploy:enrichment", "deploy:javadocs"
   
   desc <<-DESC
     No finalization steps necessary.
