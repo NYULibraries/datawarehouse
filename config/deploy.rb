@@ -1,6 +1,5 @@
 # Call with cap -S branch="<branch-name>" -S user="<user>" [staging|production] deploy
 require 'capistrano/ext/multistage'
-require 'bundler/capistrano'
 
 set :ssh_options, {:forward_agent => true}
 set :application, "datawarehouse"
