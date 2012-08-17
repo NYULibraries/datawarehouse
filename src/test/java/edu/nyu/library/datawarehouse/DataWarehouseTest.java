@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,8 +38,10 @@ public class DataWarehouseTest {
 	
 	@Before
 	public void setup() throws ConfigurationException, FileNotFoundException {
-		DataWarehouseProperties properties = 
-			new DataWarehouseProperties.Builder(new FileReader(propertiesFilename)).build();
+		File propertiesFile = new File(propertiesFilename);
+		DataWarehouseProperties properties = new DataWarehouseProperties.Builder().build();
+		if(propertiesFile.exists())
+			properties = new DataWarehouseProperties.Builder(new FileReader(propertiesFile)).build();
 		injector = 
 			Guice.createInjector(new DataWarehouseModule(properties));
 	}
