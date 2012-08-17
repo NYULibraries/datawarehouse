@@ -1,16 +1,10 @@
 # Call with cap -S branch="<branch-name>" -S user="<user>" [staging|production] deploy
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
-require 'rvm/capistrano'
 
 set :ssh_options, {:forward_agent => true}
 set :application, "datawarehouse"
 set :user, "primo"
-
-# Set the RVM ruby to use, will install if not already installed
-set :rvm_ruby_string, "1.9.3-p125"
-# Use system ruby instead of logged in user's ruby
-set :rvm_type, :system
 
 # Git variables
 set :repository,  "git@github.com:NYULibraries/datawarehouse.git"
