@@ -22,7 +22,6 @@ public class DataWarehouseProperties {
 	private Connection connection;
 
 	private DataWarehouseProperties(PropertiesConfiguration propertiesConfiguration) {
-		System.out.println(propertiesConfiguration.getString("driverClass"));
 		this.propertiesConfiguration = propertiesConfiguration;
 		if (this.propertiesConfiguration.isEmpty()) loadFromEnvironment();
 	}
@@ -36,6 +35,10 @@ public class DataWarehouseProperties {
 			connection = DriverManager.getConnection(connectionURL, username, password);
 		}
 		return connection;
+	}
+	
+	public PropertiesConfiguration getPropertiesConfiguration() {
+		return propertiesConfiguration;
 	}
 	
 	/**
@@ -59,7 +62,6 @@ public class DataWarehouseProperties {
 		}
 		
 		public Builder(Reader reader) throws ConfigurationException {
-			System.out.println("Reader: " + reader.toString());
 			propertiesConfiguration = new PropertiesConfiguration();
 			propertiesConfiguration.load(reader);
 		}
