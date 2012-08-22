@@ -13,8 +13,9 @@ import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
 
 /**
- * @author Scot Dalton
  * DataWarehouse provides an interface to query a Data Warehouse.
+ * 
+ * @author Scot Dalton
  * 
  */
 @Singleton

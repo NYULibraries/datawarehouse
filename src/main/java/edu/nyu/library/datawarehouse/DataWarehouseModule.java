@@ -7,11 +7,12 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 /**
- * @author Scot Dalton
  * DataWarehouseModule leverages Guice to provide a singleton instance of 
  * a DataWarehouse.  DataWarehouseModule is instantiated with a Properties 
  * object that includes the datawarehouse connection information.
  *
+ * @author Scot Dalton
+ * 
  */
 public class DataWarehouseModule extends AbstractModule {
 	private DataWarehouseProperties properties;
