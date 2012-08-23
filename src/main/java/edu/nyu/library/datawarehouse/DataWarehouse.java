@@ -34,7 +34,7 @@ public class DataWarehouse {
 		dataSource.setJdbcUrl(properties.getConnectionURL());
 		dataSource.setUser(properties.getUsername());                                  
 		dataSource.setPassword(properties.getPassword());
-		dataSource.setMaxStatements(properties.getMaxStatements());
+//		dataSource.setMaxStatements(properties.getMaxStatements());
 	}
 	
 	/**
