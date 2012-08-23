@@ -64,33 +64,4 @@ public class DataWarehouseTest {
 		assertEquals("154703639", results.getString(1));
 		assertFalse(results.next());
 	}
-	
-	@Test
-	public void testGetActivatedPreparedStatement_select()
-			throws FileNotFoundException, IOException, SQLException {
-		DataWarehouse dataWarehouse = 
-			injector.getInstance(DataWarehouse.class);
-		dataWarehouse.activatePreparedStatement(SQL_PREPARED_STATEMENT);
-		PreparedStatement activatedPreparedStatement = 
-			dataWarehouse.getActivatedPreparedStatement();
-		assertFalse(activatedPreparedStatement.isClosed());
-		assertEquals("OCLC_MASTER", 
-			activatedPreparedStatement.getMetaData().getColumnName(1));
-		assertEquals(java.sql.Types.VARCHAR, 
-			activatedPreparedStatement.getMetaData().getColumnType(1));
-	}
-	
-	@Test
-	public void testGetResultsFromActivatedPreparedStatement_select() 
-			throws FileNotFoundException, IOException, SQLException {
-		DataWarehouse dataWarehouse = 
-			injector.getInstance(DataWarehouse.class);
-		dataWarehouse.activatePreparedStatement(SQL_PREPARED_STATEMENT);
-		dataWarehouse.setStringForActivatedPreparedStatement(1, ALEPH_BSN);
-		ResultSet results = 
-			dataWarehouse.executeQueryForActivatedPreparedStatement();
-		assertTrue(results.next());
-		assertEquals("154703639", results.getString(1));
-		assertFalse(results.next());
-	}
 }

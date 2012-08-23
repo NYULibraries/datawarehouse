@@ -40,7 +40,7 @@ public class DataWarehouseModule extends AbstractModule {
 	DataWarehouse provideDataWarehouse() {
 		DataWarehouse dataWarehouse = null;
 		try {
-			dataWarehouse = new DataWarehouse(properties.getConnection());
+			dataWarehouse = new DataWarehouse(properties);
 		} catch (Exception e) {
 			addError(e);
 		}

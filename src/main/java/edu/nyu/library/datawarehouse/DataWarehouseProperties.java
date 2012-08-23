@@ -4,14 +4,10 @@
 package edu.nyu.library.datawarehouse;
 
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Map.Entry;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.dbutils.DbUtils;
 
 /**
  * @author Scot Dalton
@@ -19,28 +15,44 @@ import org.apache.commons.dbutils.DbUtils;
  */
 public class DataWarehouseProperties {
 	private PropertiesConfiguration propertiesConfiguration;
-	private Connection connection;
+	private String driverClass;
+	private String connectionURL;
+	private String username;
+	private String password;
+	private int maxStatements;
 
 	private DataWarehouseProperties(PropertiesConfiguration propertiesConfiguration) {
 		this.propertiesConfiguration = propertiesConfiguration;
 		if (this.propertiesConfiguration.isEmpty()) loadFromEnvironment();
+		driverClass = propertiesConfiguration.getString("driverClass");
+		connectionURL = propertiesConfiguration.getString("connectionURL");
+		username = propertiesConfiguration.getString("username");
+		password = propertiesConfiguration.getString("password");
+		maxStatements = 
+			(propertiesConfiguration.containsKey("maxStatements")) ? 
+				propertiesConfiguration.getInt("maxStatements") : 180;
+	}
+	
+	public String getDriverClass() {
+		return driverClass;
+	}
+	
+	public String getConnectionURL() {
+		return connectionURL;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
-	public Connection getConnection() throws SQLException {
-		if(connection == null) {
-			DbUtils.loadDriver(propertiesConfiguration.getString("driverClass"));
-			String connectionURL = propertiesConfiguration.getString("connectionURL");
-			String username = propertiesConfiguration.getString("username");
-			String password = propertiesConfiguration.getString("password");
-			connection = DriverManager.getConnection(connectionURL, username, password);
-		}
-		return connection;
+	public int getMaxStatements() {
+		return maxStatements;
 	}
-	
-	public PropertiesConfiguration getPropertiesConfiguration() {
-		return propertiesConfiguration;
-	}
-	
+
 	/**
 	 * @return
 	 */
