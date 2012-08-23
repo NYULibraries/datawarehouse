@@ -34,7 +34,10 @@ public class DataWarehouse {
 		dataSource.setJdbcUrl(properties.getConnectionURL());
 		dataSource.setUser(properties.getUsername());                                  
 		dataSource.setPassword(properties.getPassword());
-//		dataSource.setMaxStatements(properties.getMaxStatements());
+		dataSource.setMaxStatements(properties.getMaxStatements());
+		dataSource.setMinPoolSize(10);
+		dataSource.setMaxPoolSize(50);
+		dataSource.setInitialPoolSize(30);
 	}
 	
 	/**
@@ -52,7 +55,11 @@ public class DataWarehouse {
 	 * @throws SQLException
 	 */
 	public ResultSet executeQuery(String sql) throws SQLException {
-		return getConnection().createStatement().executeQuery(sql);
+		return dataSource.getConnection().prepareStatement(sql).executeQuery();
+	}
+	
+	public void close() {
+		dataSource.close();
 	}
 	
 	@Override
@@ -62,9 +69,5 @@ public class DataWarehouse {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
 	}
 }
