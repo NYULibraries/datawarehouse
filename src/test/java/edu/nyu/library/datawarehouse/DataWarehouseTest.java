@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -31,7 +30,6 @@ public class DataWarehouseTest {
 		"SELECT OCLC_MASTER FROM HARVARD_PROJECT_OCLC_KEYS WHERE ALEPH_BSN = ";
 	private final String ALEPH_BSN = "000000001";
 	private final String SQL_SELECT = SQL_SELECT_STUB + ALEPH_BSN;
-	private final String SQL_PREPARED_STATEMENT = SQL_SELECT_STUB + "?";
 	private final static String propertiesFilename = 
 		"./src/test/resources/META-INF/datawarehouse.properties";
 	private Injector injector;
@@ -63,5 +61,6 @@ public class DataWarehouseTest {
 		assertTrue(results.next());
 		assertEquals("154703639", results.getString(1));
 		assertFalse(results.next());
+		dataWarehouse.closeConnections();
 	}
 }

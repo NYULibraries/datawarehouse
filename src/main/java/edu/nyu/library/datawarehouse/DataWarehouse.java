@@ -52,7 +52,7 @@ public class DataWarehouse {
 	 * @throws SQLException
 	 */
 	public ResultSet executeQuery(String sql) throws SQLException {
-		return getConnection().prepareStatement(sql).executeQuery();
+		return getConnection().createStatement().executeQuery(sql);
 	}
 	
 	@Override
