@@ -61,6 +61,7 @@ public class DataWarehouseTest {
 		assertTrue(results.next());
 		assertEquals("154703639", results.getString(1));
 		assertFalse(results.next());
+		dataWarehouse.close();
 		dataWarehouse.closeConnections();
 	}
 }
