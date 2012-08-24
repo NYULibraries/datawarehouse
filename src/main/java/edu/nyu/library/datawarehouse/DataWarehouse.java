@@ -4,13 +4,9 @@
 package edu.nyu.library.datawarehouse;
 
 import java.beans.PropertyVetoException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Singleton;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.DataSources;
@@ -56,10 +52,8 @@ public class DataWarehouse {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Entry<Connection, ResultSet> executeQuery(String sql) throws SQLException {
-		Connection connection = dataSource.getConnection();
-		ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
-		return Maps.immutableEntry(connection, resultSet);
+	public ResultSet executeQuery(String sql) throws SQLException {
+		return dataSource.getConnection().prepareStatement(sql).executeQuery();
 	}
 	
 	public void close() {

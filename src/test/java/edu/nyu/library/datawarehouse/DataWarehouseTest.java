@@ -11,10 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map.Entry;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.junit.Before;
@@ -64,13 +62,10 @@ public class DataWarehouseTest {
 			StopWatch stopWatch = 
 				new StopWatch();
 			stopWatch.start("Select " + i);
-			Entry<Connection, ResultSet> resultsEntry =
-				dataWarehouse.executeQuery(SQL_SELECT);
+			ResultSet results = dataWarehouse.executeQuery(SQL_SELECT);
 			stopWatch.stop();
 			System.out.println(stopWatch.getTag() + ": " + stopWatch.getElapsedTime());
 			stopWatch.start("Process " + i);
-			Connection connection = resultsEntry.getKey();
-			ResultSet results = resultsEntry.getValue();
 			assertTrue(results.next());
 			assertEquals("154703639", results.getString(1));
 			assertFalse(results.next());
@@ -78,7 +73,7 @@ public class DataWarehouseTest {
 			System.out.println(stopWatch.getTag() + ": " + stopWatch.getElapsedTime());
 			stopWatch.start("Close " + i);
 			results.close();
-//			connection.close();
+			results.getStatement().getConnection().close();
 			stopWatch.stop();
 			System.out.println(stopWatch.getTag() + ": " + stopWatch.getElapsedTime());
 		}
