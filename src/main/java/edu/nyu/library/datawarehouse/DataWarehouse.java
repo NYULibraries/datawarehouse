@@ -36,10 +36,10 @@ public class DataWarehouse {
 		dataSource.setMaxStatements(properties.getMaxStatements());
 		dataSource.setMaxPoolSize(500);
 		dataSource.setInitialPoolSize(100);
-		dataSource.setMaxConnectionAge(60);
-		dataSource.setMaxIdleTime(30);
-		dataSource.setMaxIdleTimeExcessConnections(10);
-		dataSource.setUnreturnedConnectionTimeout(300);
+		dataSource.setMaxConnectionAge(10);
+		dataSource.setMaxIdleTime(2);
+		dataSource.setMaxIdleTimeExcessConnections(1);
+		dataSource.setUnreturnedConnectionTimeout(3);
 		dataSource.setDebugUnreturnedConnectionStackTraces(true);
 		dataSource.setNumHelperThreads(50);
 	}
