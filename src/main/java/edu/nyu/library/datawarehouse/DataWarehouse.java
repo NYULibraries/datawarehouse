@@ -37,8 +37,7 @@ public class DataWarehouse {
 		dataSource.setMaxPoolSize(500);
 		dataSource.setInitialPoolSize(100);
 		dataSource.setMaxConnectionAge(10);
-		dataSource.setMaxIdleTime(2);
-		dataSource.setMaxIdleTimeExcessConnections(1);
+		dataSource.setMaxIdleTime(3);
 		dataSource.setUnreturnedConnectionTimeout(3);
 		dataSource.setDebugUnreturnedConnectionStackTraces(true);
 		dataSource.setNumHelperThreads(50);
