@@ -34,12 +34,15 @@ public class DataWarehouse {
 		dataSource.setUser(properties.getUsername());                                  
 		dataSource.setPassword(properties.getPassword());
 		dataSource.setMaxStatements(properties.getMaxStatements());
-		dataSource.setMinPoolSize(30);
-		dataSource.setMaxPoolSize(100);
-		dataSource.setInitialPoolSize(50);
+		dataSource.setMinPoolSize(100);
+		dataSource.setMaxPoolSize(1000);
+		dataSource.setInitialPoolSize(500);
 		dataSource.setMaxConnectionAge(60);
 		dataSource.setMaxIdleTime(30);
 		dataSource.setMaxIdleTimeExcessConnections(10);
+		dataSource.setUnreturnedConnectionTimeout(300);
+		dataSource.setDebugUnreturnedConnectionStackTraces(true);
+		dataSource.setNumHelperThreads(50);
 	}
 	
 	/**
