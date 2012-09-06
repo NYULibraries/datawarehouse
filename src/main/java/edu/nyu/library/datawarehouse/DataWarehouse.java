@@ -34,9 +34,8 @@ public class DataWarehouse {
 		dataSource.setUser(properties.getUsername());                                  
 		dataSource.setPassword(properties.getPassword());
 		dataSource.setMaxStatements(properties.getMaxStatements());
-		dataSource.setMinPoolSize(100);
-		dataSource.setMaxPoolSize(1000);
-		dataSource.setInitialPoolSize(500);
+		dataSource.setMaxPoolSize(500);
+		dataSource.setInitialPoolSize(100);
 		dataSource.setMaxConnectionAge(60);
 		dataSource.setMaxIdleTime(30);
 		dataSource.setMaxIdleTimeExcessConnections(10);
