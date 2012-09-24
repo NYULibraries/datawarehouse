@@ -36,3 +36,5 @@ Since the DataWarehouse library can be leveraged across systems, deploy tasks ar
 Currently the following deploy tasks are available
 
   - enrichment
+
+Build Status [![Build Status](http://jenkins1.bobst.nyu.edu/job/DataWarehouse/badge/icon)](http://jenkins1.bobst.nyu.edu:8080/job/DataWarehouse/)
